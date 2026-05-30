@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>MaMkin_Donat — Telegram Stars | Элитные звёзды Telegram</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #05050A;
+            color: #FFFFFF;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* кастомный скролл */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a14;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #a855f7;
+            border-radius: 10px;
+        }
+
+        /* анимированный фон + частицы */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .gradient-sphere {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(130px);
+            opacity: 0.45;
+            animation: floatSphere 18s infinite alternate ease-in-out;
+        }
+
+        .sphere-1 {
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle at 30% 40%, #a855f7, #4a1d8c);
+            top: -15%;
+            right: -10%;
+        }
+
+        .sphere-2 {
+            width: 650px;
+            height: 650px;
+            background: radial-gradient(circle, #06b6d4, #0e4b6e);
+            bottom: -20%;
+            left: -15%;
+            animation-duration: 25s;
+        }
+
+        .sphere-3 {
+            width: 400px;
+            height: 400px;
+            background: #7c3aed;
+            top: 40%;
+            left: 20%;
+            opacity: 0.25;
+            filter: blur(100px);
+            animation-duration: 15s;
+        }
+
+        @keyframes floatSphere {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4%, 6%) scale(1.08); }
+        }
+
+        /* контейнер */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 32px 60px;
+        }
+
+        /* шапка с профилем */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 48px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            backdrop-filter: blur(4px);
+        }
+
+        .profile-area {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .avatar-frame {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(168,85,247,0.3);
+            transition: transform 0.2s ease;
+        }
+
+        .avatar-frame:hover {
+            transform: scale(1.02);
+        }
+
+        .avatar-inner {
+            width: 46px;
+            height: 46px;
+            background: #0b0b14;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: 600;
+            backdrop-filter: blur(2px);
+        }
+
+        .site-identity h2 {
+            font-size: 1.65rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            background: linear-gradient(120deg, #fff, #d9d9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .site-identity p {
+            font-size: 0.75rem;
+            color: #a0a0b8;
+            margin-top: 4px;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #cdcdff;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.25s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            bottom: -6px;
+            left: 0;
+            background: linear-gradient(90deg, #a855f7, #06b6d4);
+            transition: width 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* кнопки */
+        .btn-primary, .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            border-radius: 120px;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.2);
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-primary {
+            background: linear-gradient(105deg, #a855f7 0%, #3b82f6 100%);
+            color: white;
+            padding: 12px 28px;
+            box-shadow: 0 4px 15px rgba(168,85,247,0.25);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 28px rgba(168,85,247,0.4);
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(168,85,247,0.5);
+            color: #f0f0ff;
+            padding: 8px 20px;
+            font-weight: 500;
+        }
+
+        .btn-outline:hover {
+            background: rgba(168,85,247,0.15);
+            border-color: #a855f7;
+        }
+
+        /* bento grid элегантный */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 16px;
+        }
+
+        .bento-card {
+            background: rgba(12, 12, 22, 0.55);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 2rem;
+            padding: 28px 28px;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1), transform 0.6s cubic-bezier(0.2, 0.9, 0.4, 1.1), border-color 0.2s;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        .bento-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .bento-card:hover {
+            border-color: rgba(168,85,247,0.4);
+            background: rgba(18, 18, 32, 0.65);
+            transform: translateY(-4px);
+        }
+
+        /* hero особенный */
+        .hero-card {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: radial-gradient(ellipse at 70% 30%, rgba(88, 28, 135, 0.25), rgba(2, 6, 23, 0.7));
+            border: 1px solid rgba(168,85,247,0.25);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .micro-badge {
+            background: rgba(168,85,247,0.2);
+            backdrop-filter: blur(8px);
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #d9b4ff;
+            display: inline-block;
+            margin-bottom: 24px;
+            letter-spacing: 0.3px;
+            border: 0.5px solid rgba(168,85,247,0.4);
+        }
+
+        .hero-card h1 {
+            font-size: 3.4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -1.5px;
+            margin-bottom: 18px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(125deg, #c58aff, #5dd0ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hero-description {
+            color: #b9b9d6;
+            max-width: 80%;
+            font-size: 1rem;
+            line-height: 1.45;
+            margin-bottom: 32px;
+        }
+
+        .morph-orb {
+            position: absolute;
+            right: -30px;
+            bottom: -30px;
+            width: 260px;
+            height: 260px;
+            background: linear-gradient(135deg, #a855f7, #06b6d4);
+            border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%;
+            filter: blur(28px);
+            opacity: 0.5;
+            animation: slowDrift 12s infinite alternate;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes slowDrift {
+            0% { border-radius: 40% 60% 70% 30% / 40% 50% 50% 60%; transform: translate(0,0) rotate(0deg);}
+            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(-15px, 20px) rotate(6deg);}
+        }
+
+        .feature-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+
+        .feature-icon {
+            font-size: 26px;
+            background: rgba(168,85,247,0.1);
+            padding: 10px;
+            border-radius: 18px;
+            backdrop-filter: blur(4px);
+        }
+
+        .steps-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .step-number {
+            width: 34px;
+            height: 34px;
+            background: rgba(6,182,212,0.12);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: #6ee7ff;
+            border: 1px solid rgba(6,182,212,0.3);
+        }
+
+        .cta-card {
+            grid-column: span 3;
+            text-align: center;
+            background: linear-gradient(110deg, rgba(88, 28, 135, 0.25), rgba(2, 84, 94, 0.2));
+            border: 1px solid rgba(168,85,247,0.2);
+            padding: 44px 28px;
+        }
+
+        .cta-card h3 {
+            font-size: 1.9rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        /* кнопка с пульсом */
+        .pulse-gentle {
+            animation: softPulse 2s infinite;
+        }
+
+        @keyframes softPulse {
+            0% { box-shadow: 0 0 0 0 rgba(168,85,247,0.4);}
+            70% { box-shadow: 0 0 0 12px rgba(168,85,247,0);}
+            100% { box-shadow: 0 0 0 0 rgba(168,85,247,0);}
+        }
+
+        /* футер */
+        .footer-note {
+            margin-top: 70px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #55557a;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 32px;
+        }
+
+        /* responsive */
+        @media (max-width: 980px) {
+            .container { padding: 20px 24px; }
+            .hero-card h1 { font-size: 2.4rem; }
+            .hero-description { max-width: 100%; }
+            .bento-grid { gap: 18px; }
+        }
+
+        @media (max-width: 760px) {
+            .navbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .nav-links { flex-wrap: wrap; gap: 18px; }
+            .bento-grid { grid-template-columns: 1fr; }
+            .hero-card { grid-column: span 1; grid-row: auto; }
+            .cta-card { grid-column: span 1; }
+            .hero-card h1 { font-size: 2rem; }
+            .morph-orb { width: 180px; height: 180px; opacity: 0.4; }
+            .bento-card { padding: 24px; }
+        }
+
+        @media (max-width: 480px) {
+            .btn-primary { padding: 10px 20px; font-size: 0.85rem; }
+            .site-identity h2 { font-size: 1.3rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="ambient-bg">
+    <div class="gradient-sphere sphere-1"></div>
+    <div class="gradient-sphere sphere-2"></div>
+    <div class="gradient-sphere sphere-3"></div>
+</div>
+
+<div class="container">
+    <!-- Шапка с именем сайта и профилем -->
+    <nav class="navbar">
+        <div class="profile-area">
+            <div class="avatar-frame">
+                <div class="avatar-inner">⭐</div>
+            </div>
+            <div class="site-identity">
+                <h2>MaMkin_Donat</h2>
+                <p>✦ premium Telegram Stars ✦</p>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#hero" class="nav-link" data-nav="hero">Главная</a>
+            <a href="#features" class="nav-link" data-nav="features">Почему мы</a>
+            <a href="#steps" class="nav-link" data-nav="steps">Как заказать</a>
+            <a href="#contact" class="nav-link" data-nav="contact">Контакты</a>
+            <a href="https://t.me/emmmmemmmme" target="_blank" class="btn-outline">📨 Telegram</a>
+        </div>
+    </nav>
+
+    <!-- Bento основная сетка -->
+    <div class="bento-grid" id="bento-container">
+        <!-- Hero карточка (звездный) -->
+        <div class="bento-card hero-card" data-category="hero" id="hero">
+            <div class="hero-content">
+                <span class="micro-badge">🔥 эксклюзивный курс 2026</span>
+                <h1>Звёзды <span class="gradient-text">Telegram</span><br>мгновенно</h1>
+                <p class="hero-description">Пополнение за 30 секунд, защита данных и лучший курс на рынке. Только ID — без паролей.</p>
+                <a href="https://t.me/emmmmemmmme" target="_blank" class="btn-primary">✨ Приобрести Stars</a>
+            </div>
+            <div class="morph-orb"></div>
+        </div>
+
+        <!-- Почему мы (features) -->
+        <div class="bento-card" data-category="features" id="features">
+            <h3 style="font-size: 1.55rem; margin-bottom: 24px; font-weight: 600;">Почему мы?</h3>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div><strong style="font-size: 1.1rem;">Молниеносно</strong><br><span style="color:#a9a9c5; font-size:0.85rem;">После оплаты — моментальное начисление</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🛡️</div>
+                    <div><strong style="font-size: 1.1rem;">Приватность</strong><br><span style="color:#a9a9c5; font-size:0.85rem;">Нужен только @username / ID, никаких паролей</span></div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💎</div>
+                    <div><strong style="font-size: 1.1rem;">Честный курс</strong><br><span style="color:#a9a9c5; font-size:0.85rem;">Лучшая цена на рынке Stars</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Что это такое? (блок инфо) -->
+        <div class="bento-card">
+            <h3 style="font-size: 1.55rem; margin-bottom: 18px;">✨ Что такое Stars?</h3>
+            <p style="color:#cfcfed; line-height: 1.5; font-size:0.9rem;">Telegram Stars — официальная внутренняя валюта. Оплачивай мини-приложения, покупай цифровые товары, поддерживай каналы и авторов. <strong style="color:white;">Удобно и безопасно.</strong></p>
+            <div style="margin-top: 24px; background: rgba(168,85,247,0.08); border-radius: 20px; padding: 12px; text-align: center; font-size: 0.8rem;">
+                🔹 1 Star ≈ поддержка любимых проектов
+            </div>
+        </div>
+
+        <!-- Пошаговая инструкция -->
+        <div class="bento-card" id="steps">
+            <h3 style="font-size: 1.55rem; margin-bottom: 24px;">📋 Как заказать?</h3>
+            <div class="steps-list">
+                <div class="step"><div class="step-number">1</div><p>Переходи в диалог <span style="color:#a5f3ff;">@emmmmemmmme</span></p></div>
+                <div class="step"><div class="step-number">2</div><p>Укажи свой Telegram ID и нужное количество Stars</p></div>
+                <div class="step"><div class="step-number">3</div><p>Оплати удобным способом (карта, крипто, SBП)</p></div>
+                <div class="step"><div class="step-number">✓</div><p>Получаешь Stars на баланс за 1-2 минуты</p></div>
+            </div>
+        </div>
+
+        <!-- Дополнительный блок доверия -->
+        <div class="bento-card">
+            <h3 style="font-size: 1.4rem;">🌙 24/7 поддержка</h3>
+            <p style="margin: 16px 0; color:#b9b9e0;">Мы на связи каждый день. Поможем с любым количеством звёзд — от 50 до 50 000+.</p>
+            <div style="display: flex; gap: 12px; margin-top: 12px;">
+                <span style="background: #0f0f1a; padding: 6px 12px; border-radius: 40px; font-size:0.7rem;">✔️ автоматическая выдача</span>
+                <span style="background: #0f0f1a; padding: 6px 12px; border-radius: 40px; font-size:0.7rem;">✔️ гарантия</span>
+            </div>
+        </div>
+
+        <!-- CTA большой блок внизу -->
+        <div class="bento-card cta-card" id="contact">
+            <h3>💫 Готов стать заметнее в Telegram?</h3>
+            <p style="color:#b8b8df; margin-bottom: 28px; max-width: 500px; margin-left: auto; margin-right: auto;">Прокачай свой профиль, оплачивай сервисы и выделяйся среди других пользователей.</p>
+            <a href="https://t.me/emmmmemmmme" target="_blank" class="btn-primary pulse-gentle" style="padding: 14px 36px; font-size: 1rem;">
+                📩 Связаться в Telegram
+            </a>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        <span>⭐ MaMkin_Donat — официальный партнёр. Конфиденциальность и скорость. © 2026</span>
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Плавная анимация появления bento-карточек с задержками (stagger)
+        const cards = document.querySelectorAll('.bento-card');
+        
+        // Сброс стилей перед анимацией
+        cards.forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.classList.remove('visible');
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, idx) => {
+                if (entry.isIntersecting) {
+                    // небольшая задержка последовательного появления
+                    const targetCard = entry.target;
+                    const allCards = Array.from(cards);
+                    const cardIndex = allCards.indexOf(targetCard);
+                    setTimeout(() => {
+                        targetCard.style.opacity = '1';
+                        targetCard.style.transform = 'translateY(0)';
+                        targetCard.classList.add('visible');
+                    }, cardIndex * 90);
+                    observer.unobserve(targetCard);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+        cards.forEach(card => observer.observe(card));
+
+        // --- Плавная навигация (скролл к секциям) с учетом хешей и кастомных id ---
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        function scrollToSection(sectionId) {
+            let targetElement = null;
+            if (sectionId === 'hero') targetElement = document.getElementById('hero');
+            else if (sectionId === 'features') targetElement = document.getElementById('features');
+            else if (sectionId === 'steps') targetElement = document.getElementById('steps');
+            else if (sectionId === 'contact') targetElement = document.getElementById('contact');
+            
+            if (targetElement) {
+                const offset = 90; // отступ от шапки
+                const elementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: elementPosition - offset,
+                    behavior: 'smooth'
+                });
+                // обновить URL без скачка (опционально)
+                history.pushState(null, '', `#${sectionId}`);
+            }
+        }
+
+        // обработка кликов по навигации
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('data-nav');
+                if (targetId) {
+                    scrollToSection(targetId);
+                }
+            });
+        });
+
+        // если в URL есть хеш при загрузке
+        if (window.location.hash) {
+            const hash = window.location.hash.substring(1);
+            if (['hero', 'features', 'steps', 'contact'].includes(hash)) {
+                setTimeout(() => {
+                    scrollToSection(hash);
+                }, 200);
+            }
+        }
+
+        // Добавляем легкий параллакс для сфер (дополнительный эфект утонченности)
+        document.addEventListener('mousemove', (e) => {
+            const spheres = document.querySelectorAll('.gradient-sphere');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            spheres.forEach((sphere, i) => {
+                const speed = i === 0 ? 12 : 18;
+                const moveX = (mouseX - 0.5) * speed;
+                const moveY = (mouseY - 0.5) * speed;
+                sphere.style.transform = `translate(${moveX}px, ${moveY}px) scale(1)`;
+            });
+        });
+
+        // hover для кнопок делает мягкий свечение
+        const btns = document.querySelectorAll('.btn-primary, .btn-outline');
+        btns.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.transition = 'all 0.2s';
+            });
+        });
+        
+        // дополнительный micro-interaction: изменяем стиль шапки при скролле
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbar.style.borderBottomColor = 'rgba(168,85,247,0.25)';
+                navbar.style.backdropFilter = 'blur(12px)';
+            } else {
+                navbar.style.borderBottomColor = 'rgba(255,255,255,0.05)';
+                navbar.style.backdropFilter = 'blur(4px)';
+            }
+        });
+    })();
+</script>
+</body>
+</html>
